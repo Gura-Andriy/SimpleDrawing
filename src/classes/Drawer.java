@@ -9,22 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Drawer implements Draw {
-    public void randomFill(Colors[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = Colors.getRandomColor();
-            }
-        }
-    }
-
-    public void gradientFill(byte[][] array, int resolution) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = (byte) (( (float)j / (float) array[1].length) * resolution);
-            }
-        }
-    }
-
     public void createImage(Colors[][] array, String fileName) throws IOException {
         BufferedImage image = new BufferedImage(array[0].length, array.length, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < array.length; i++) {
@@ -35,5 +19,13 @@ public class Drawer implements Draw {
             }
         }
         ImageIO.write(image, "png", new File(String.format("%s.png", fileName)));
+    }
+
+    public void randomFill(Colors[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = Colors.getRandomColor();
+            }
+        }
     }
 }

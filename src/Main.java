@@ -11,7 +11,7 @@ public class Main {
         new Drawer().randomFill(imageArray);
         new Drawer2DShape().createImage(imageArray, "random");
 
-        new Drawer2DShape().drawSquare(imageArray, 55);
+        new Drawer2DShape().drawSquare(imageArray, 6, Colors.BLACK);
         new Drawer2DShape().createImage(imageArray, "square");
     }
 }
