@@ -1,24 +1,26 @@
 package classes;
 
+import enums.Colors;
+
 public class Drawer2DShape extends Drawer {
-    public void drawTxtSquare(byte[][] array, int scale) {
+    public void drawSquare(Colors[][] array, int scale) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 int i1 = (array.length - (array.length / scale)) - 1;
                 if (i == array.length / scale || i == i1) {
-                    if (j >= (array[i].length / scale) - 1 && j <= (array[i].length - (array[i].length / scale)) - 1) {
-                        array[i][j] = 1;
+                    if (j >= (array[i].length / scale) && j <= (array[i].length - (array[i].length / scale)) - 1) {
+                        array[i][j] = Colors.BLACK;
                     } else {
-                        array[i][j] = 0;
+                        array[i][j] = Colors.WHITE;
                     }
                 } else if (i > (array.length / scale) - 1 && i < i1) {
-                    if (j == (array[i].length / scale) - 1 || j == (array[i].length - (array[i].length / scale)) - 1) {
-                        array[i][j] = 1;
+                    if (j == (array[i].length / scale) || j == (array[i].length - (array[i].length / scale)) - 1) {
+                        array[i][j] = Colors.BLACK;
                     } else {
-                        array[i][j] = 0;
+                        array[i][j] = Colors.WHITE;
                     }
                 } else {
-                    array[i][j] = 0;
+                    array[i][j] = Colors.WHITE;
                 }
             }
         }
