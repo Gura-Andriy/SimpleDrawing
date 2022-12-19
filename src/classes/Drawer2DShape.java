@@ -1,5 +1,7 @@
-public class ShapeDrawer2D extends Drawer {
-    public void drawSquare(byte[][] array, int scale) {
+package classes;
+
+public class Drawer2DShape extends Drawer {
+    public void drawTxtSquare(byte[][] array, int scale) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 int i1 = (array.length - (array.length / scale)) - 1;
