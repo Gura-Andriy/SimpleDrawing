@@ -10,17 +10,11 @@ public class Drawer2DShape extends Drawer {
                 if (i == array.length / scale || i == i1) {
                     if (j >= (array[i].length / scale) && j <= (array[i].length - (array[i].length / scale)) - 1) {
                         array[i][j] = Colors.BLACK;
-                    } else {
-                        array[i][j] = Colors.WHITE;
                     }
                 } else if (i > (array.length / scale) - 1 && i < i1) {
                     if (j == (array[i].length / scale) || j == (array[i].length - (array[i].length / scale)) - 1) {
                         array[i][j] = Colors.BLACK;
-                    } else {
-                        array[i][j] = Colors.WHITE;
                     }
-                } else {
-                    array[i][j] = Colors.WHITE;
                 }
             }
         }
