@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Map;
 
 public class Drawer implements Draw {
     public void randomFill(Colors[][] array) {
@@ -26,19 +25,7 @@ public class Drawer implements Draw {
         }
     }
 
-    public void toTxtFile(byte[][] array, String fileName, Map<Byte, Character> characters) throws IOException {
-        FileWriter fileWriter = new FileWriter(String.format("%s.txt", fileName));
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        for (byte[] bytes : array) {
-            for (int j = 0; j < array[1].length; j++) {
-                printWriter.print(characters.get(bytes[j]));
-            }
-            printWriter.println();
-        }
-        printWriter.close();
-    }
-
-    public void toImgFile(Colors[][] array, String fileName) throws IOException {
+    public void createImage(Colors[][] array, String fileName) throws IOException {
         BufferedImage image = new BufferedImage(array[0].length, array.length, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[1].length; j++) {
