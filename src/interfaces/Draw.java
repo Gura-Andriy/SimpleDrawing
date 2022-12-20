@@ -1,10 +1,10 @@
 package interfaces;
 
-import enums.Colors;
+import classes.Pixel;
 
 import java.io.IOException;
 
 public interface Draw {
-    void randomFill(Colors[][] array);
-    void createImage(Colors[][] array, String fileName) throws IOException;
+    void createImage(Pixel[][] pixels, String fileName) throws IOException;
+    void randomFill(Pixel[][] pixels);
 }

@@ -4,27 +4,27 @@ import enums.Colors;
 import interfaces.Draw;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Drawer implements Draw {
-    public void createImage(Colors[][] array, String fileName) throws IOException {
-        BufferedImage image = new BufferedImage(array[0].length, array.length, BufferedImage.TYPE_INT_RGB);
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[1].length; j++) {
-                Colors pixel = array[i][j];
-                Color color = new Color(pixel.getR(), pixel.getG(), pixel.getB());
-                image.setRGB(j, i, color.getRGB());
+    @Override
+    public void createImage(Pixel[][] pixels, String fileName) throws IOException {
+        BufferedImage image = new BufferedImage(pixels[0].length, pixels.length, BufferedImage.TYPE_INT_RGB);
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[1].length; j++) {
+                image.setRGB(j, i, pixels[i][j].getColor().getRGB());
             }
         }
         ImageIO.write(image, "png", new File(String.format("%s.png", fileName)));
     }
 
-    public void randomFill(Colors[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = Colors.getRandomColor();
+    @Override
+    public void randomFill(Pixel[][] pixels) {
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                pixels[i][j] = new Pixel();
+                pixels[i][j].setColor(Colors.getRandomColor());
             }
         }
     }

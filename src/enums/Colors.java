@@ -1,5 +1,7 @@
 package enums;
 
+import java.awt.*;
+
 public enum Colors {
     WHITE(255, 255, 255),
     BLACK(0, 0, 0),
@@ -29,15 +31,15 @@ public enum Colors {
         return b;
     }
 
-    public static Colors getRandomColor() {
+    public static Color getRandomColor() {
         int randomNumber = (int) (Math.random() * 6);
         switch(randomNumber) {
-            case 1: return BLACK;
-            case 2: return RED;
-            case 3: return GREEN;
-            case 4: return BLUE;
-            case 5: return YELLOW;
-            default: return WHITE;
+            case 1: return new Color(BLACK.getR(), BLACK.getG(), BLACK.getB());
+            case 2: return new Color(RED.getR(), RED.getG(), RED.getB());
+            case 3: return new Color(GREEN.getR(), GREEN.getG(), GREEN.getB());
+            case 4: return new Color(BLUE.getR(), BLUE.getG(), BLUE.getB());
+            case 5: return new Color(YELLOW.getR(), YELLOW.getG(), YELLOW.getB());
+            default: return new Color(WHITE.getR(), WHITE.getG(), WHITE.getB());
         }
     }
 }
