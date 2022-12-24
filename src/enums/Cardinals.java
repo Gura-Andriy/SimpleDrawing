@@ -24,4 +24,12 @@ public enum Cardinals {
     public String getName() {
         return name;
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
 }

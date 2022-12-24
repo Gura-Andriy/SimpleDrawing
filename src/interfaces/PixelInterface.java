@@ -1,12 +1,12 @@
 package interfaces;
 
-import enums.Cardinals;
+import classes.Pixel;
 
 import java.awt.*;
-import java.util.Map;
+import java.util.ArrayList;
 
 public interface PixelInterface {
-    Map<String, Cardinals> getNeighbors();
+    ArrayList<Pixel> getNeighbors(Pixel[][] pixels);
     void setCoordinates(int y, int x);
     void setColor(Color color);
     int getY();

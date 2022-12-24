@@ -5,26 +5,37 @@ import enums.Colors;
 import interfaces.PixelInterface;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Pixel implements PixelInterface {
     private int y;
     private int x;
     private Color color;
 
+    public Pixel(int y, int x) {
+        this.y = y;
+        this.x = x;
+    }
+
     @Override
-    public Map<String, Cardinals> getNeighbors() {
-        return new HashMap<>() {{
-            put("N", Cardinals.NORTH);
-            put("NE", Cardinals.NORTH_EAST);
-            put("NW", Cardinals.NORTH_WEST);
-            put("S", Cardinals.SOUTH);
-            put("SE", Cardinals.SOUTH_EAST);
-            put("SW", Cardinals.SOUTH_WEST);
-            put("E", Cardinals.EAST);
-            put("W", Cardinals.WEST);
-        }};
+    public ArrayList<Pixel> getNeighbors(Pixel[][] pixels) {
+        Cardinals[] cardinals = new Cardinals[] {
+                Cardinals.NORTH,
+                Cardinals.NORTH_EAST,
+                Cardinals.NORTH_WEST,
+                Cardinals.SOUTH,
+                Cardinals.SOUTH_EAST,
+                Cardinals.SOUTH_WEST,
+                Cardinals.EAST,
+                Cardinals.WEST
+        };
+        ArrayList<Pixel> neighbor = new ArrayList<>();
+        for (Cardinals cardinal : cardinals) {
+            try {
+                neighbor.add(pixels[y + cardinal.getY()][x + cardinal.getX()]);
+            } catch (NullPointerException | IndexOutOfBoundsException ignored) { }
+        }
+        return neighbor;
     }
 
     @Override
@@ -54,5 +65,21 @@ public class Pixel implements PixelInterface {
     @Override
     public Color getColor() {
         return color;
+    }
+
+    public void smoothing(Pixel[][] pixels) {
+        int rS = 0;
+        int gS = 0;
+        int bS = 0;
+        int neighborsSize = getNeighbors(pixels).size();
+        for (int i = 0; i < neighborsSize; i++) {
+            try {
+                Pixel neighbor = pixels[y + getNeighbors(pixels).get(i).getY()][x + getNeighbors(pixels).get(i).getX()];
+                rS += neighbor.getColor().getRed();
+                gS += neighbor.getColor().getGreen();
+                bS += neighbor.getColor().getBlue();
+            } catch (NullPointerException | IndexOutOfBoundsException ignored) { }
+        }
+        color = new Color(rS / neighborsSize, gS / neighborsSize, bS / neighborsSize);
     }
 }
