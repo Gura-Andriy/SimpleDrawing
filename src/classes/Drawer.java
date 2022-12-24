@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.stream.IntStream;
 
 public class Drawer implements Draw {
     @Override
@@ -60,14 +59,26 @@ public class Drawer implements Draw {
     }
 
     public void smoothing(Pixel[][] pixels) {
-//        Pixel[][] sPixels = new Pixel[pixels.length][pixels[0].length];
-//        for (int y = 0; y < pixels.length; y++) {
-//            System.arraycopy(pixels[y], 0, sPixels[y], 0, pixels[y].length);
-//        }
+        Pixel[][] sPixels = new Pixel[pixels.length][pixels[0].length];
+        for (int y = 0; y < pixels.length; y++) {
+            System.arraycopy(pixels[y], 0, sPixels[y], 0, pixels[y].length);
+        }
         for (Pixel[] pixel : pixels) {
             for (Pixel value : pixel) {
-                value.smoothing(pixels);
+                value.smoothing(sPixels);
             }
         }
+    }
+
+    public Pixel[][] getImage(File file) throws IOException {
+            BufferedImage image = ImageIO.read(file);
+            Pixel[][] pixels = new Pixel[image.getHeight()][image.getWidth()];
+            for (int y = 0; y < image.getHeight(); y++) {
+                for (int x = 0; x < image.getWidth(); x++){
+                    pixels[y][x] = new Pixel(y,x);
+                    pixels[y][x].setColor(new Color(image.getRGB(x, y)));
+                }
+            }
+            return pixels;
     }
 }
